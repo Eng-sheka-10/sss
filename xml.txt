@@ -1,0 +1,88 @@
+<Window x:Class="clinic.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:clinic"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <TabControl>
+            <TabItem Header="Patients">
+                <StackPanel>
+                    <TextBlock Text="Patient Name:"/>
+                    <TextBox x:Name="txtPatientName"/>
+                    <TextBlock Text="Age:"/>
+                    <TextBox x:Name="txtPatientAge"/>
+                    <TextBlock Text="Gender:"/>
+                    <TextBox x:Name="txtPatientGender"/>
+                    <TextBlock Text="Contact Info:"/>
+                    <TextBox x:Name="txtPatientContact"/>
+                    <Button Content="Add Patient" Click="AddPatient_Click"/>
+                    <DataGrid x:Name="dataGridPatients" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding PatientId}"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Age" Binding="{Binding Age}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Doctors">
+                <StackPanel>
+                    <TextBlock Text="Doctor Name:"/>
+                    <TextBox x:Name="txtDoctorName"/>
+                    <TextBlock Text="Specialization:"/>
+                    <TextBox x:Name="txtDoctorSpecialization"/>
+                    <TextBlock Text="Contact Info:"/>
+                    <TextBox x:Name="txtDoctorContact"/>
+                    <Button Content="Add Doctor" Click="AddDoctor_Click"/>
+                    <DataGrid x:Name="dataGridDoctors" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding DoctorId}"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Specialization" Binding="{Binding Specialization}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Appointments">
+                <StackPanel>
+                    <TextBlock Text="Select Patient:"/>
+                    <ComboBox x:Name="comboBoxPatients" DisplayMemberPath="Name" SelectedValuePath="PatientId"/>
+                    <TextBlock Text="Select Doctor:"/>
+                    <ComboBox x:Name="comboBoxDoctors" DisplayMemberPath="Name" SelectedValuePath="DoctorId"/>
+                    <TextBlock Text="Appointment Date:"/>
+                    <DatePicker x:Name="datePickerAppointment"/>
+                    <Button Content="Schedule Appointment" Click="ScheduleAppointment_Click"/>
+                    <DataGrid x:Name="dataGridAppointments" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding AppointmentId}"/>
+                            <DataGridTextColumn Header="Patient ID" Binding="{Binding PatientId}"/>
+                            <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorId}"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding AppointmentDate}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Medical History">
+                <StackPanel>
+                    <TextBlock Text="Select Patient:"/>
+                    <ComboBox x:Name="comboBoxHistoryPatients" DisplayMemberPath="Name" SelectedValuePath="PatientId"/>
+                    <TextBlock Text="Condition:"/>
+                    <TextBox x:Name="txtCondition"/>
+                    <TextBlock Text="Treatment:"/>
+                    <TextBox x:Name="txtTreatment"/>
+                    <Button Content="Add Medical History" Click="AddMedicalHistory_Click"/>
+                    <DataGrid x:Name="dataGridMedicalHistory" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding HistoryId}"/>
+                            <DataGridTextColumn Header="Patient ID" Binding="{Binding PatientId}"/>
+                            <DataGridTextColumn Header="Condition" Binding="{Binding Condition}"/>
+                            <DataGridTextColumn Header="Treatment" Binding="{Binding Treatment}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>

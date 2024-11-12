@@ -1,0 +1,118 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Remoting.Contexts;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+
+
+namespace clinic
+{
+    public partial class MainWindow : Window
+    {
+        clinicDBEntities context = new clinicDBEntities();
+        public MainWindow()
+        {
+            InitializeComponent();
+            context = new clinicDBEntities();
+            LoadPatients();
+            LoadDoctors();
+            LoadAppointments();
+            LoadMedicalHistory();
+        }
+
+        private void LoadPatients()
+        {
+            var patients = context.Patients.ToList();
+            dataGridPatients.ItemsSource = patients;
+            comboBoxPatients.ItemsSource = patients;
+            comboBoxHistoryPatients.ItemsSource = patients;
+        }
+
+        private void LoadDoctors()
+        {
+            var doctors = context.Doctors.ToList();
+            dataGridDoctors.ItemsSource = doctors;
+            comboBoxDoctors.ItemsSource = doctors;
+        }
+
+        private void LoadAppointments()
+        {
+            dataGridAppointments.ItemsSource = context.Appointments.ToList();
+        }
+
+        private void LoadMedicalHistory()
+        {
+            dataGridMedicalHistory.ItemsSource = context.MedicalHistories.ToList();
+        }
+
+        private void AddPatient_Click(object sender, RoutedEventArgs e)
+        {
+            var patient = new Patient
+            {
+                Name = txtPatientName.Text,
+                Age = int.TryParse(txtPatientAge.Text, out int age) ? age : 0,
+                Gender = txtPatientGender.Text,
+                ContactInfo = txtPatientContact.Text
+            };
+
+            context.Patients.Add(patient);
+            context.SaveChanges();
+            LoadPatients();
+        }
+
+        private void AddDoctor_Click(object sender, RoutedEventArgs e)
+        {
+            var doctor = new Doctor
+            {
+                Name = txtDoctorName.Text,
+                Specialization = txtDoctorSpecialization.Text,
+                ContactInfo = txtDoctorContact.Text
+            };
+
+            context.Doctors.Add(doctor);
+            context.SaveChanges();
+            LoadDoctors();
+        }
+
+        private void ScheduleAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            var appointment = new Appointment
+            {
+                PatientId = (int)comboBoxPatients.SelectedValue,
+                DoctorId = (int)comboBoxDoctors.SelectedValue,
+                AppointmentDate = datePickerAppointment.SelectedDate ?? DateTime.Now,
+                Status = "Scheduled"
+            };
+
+            context.Appointments.Add(appointment);
+            context.SaveChanges();
+            LoadAppointments();
+        }
+
+        private void AddMedicalHistory_Click(object sender, RoutedEventArgs e)
+        {
+            var history = new MedicalHistory
+            {
+                PatientId = (int)comboBoxHistoryPatients.SelectedValue,
+                Condition = txtCondition.Text,
+                Treatment = txtTreatment.Text,
+                DateRecorded = DateTime.Now
+            };
+
+            context.MedicalHistories.Add(history);
+            context.SaveChanges();
+            LoadMedicalHistory();
+        }
+    }
+}
