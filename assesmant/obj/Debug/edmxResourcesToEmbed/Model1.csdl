@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="lolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="task">
+    <Key>
+      <PropertyRef Name="taskid" />
+    </Key>
+    <Property Name="taskid" Type="Int32" Nullable="false" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="tasktitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="taskdes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="taskstat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="duedate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="user" Relationship="Self.FK__tasks__userid__276EDEB3" FromRole="tasks" ToRole="users" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="userpass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="userrole" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tasks" Relationship="Self.FK__tasks__userid__276EDEB3" FromRole="users" ToRole="tasks" />
+  </EntityType>
+  <Association Name="FK__tasks__userid__276EDEB3">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="tasks" Type="Self.task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="userid" />
+      </Principal>
+      <Dependent Role="tasks">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="lolEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tasks" EntityType="Self.task" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK__tasks__userid__276EDEB3" Association="Self.FK__tasks__userid__276EDEB3">
+      <End Role="users" EntitySet="users" />
+      <End Role="tasks" EntitySet="tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

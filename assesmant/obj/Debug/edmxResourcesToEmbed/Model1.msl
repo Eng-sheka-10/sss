@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="lolModelStoreContainer" CdmEntityContainer="lolEntities">
+    <EntitySetMapping Name="tasks">
+      <EntityTypeMapping TypeName="lolModel.task">
+        <MappingFragment StoreEntitySet="tasks">
+          <ScalarProperty Name="taskid" ColumnName="taskid" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="tasktitle" ColumnName="tasktitle" />
+          <ScalarProperty Name="taskdes" ColumnName="taskdes" />
+          <ScalarProperty Name="taskstat" ColumnName="taskstat" />
+          <ScalarProperty Name="duedate" ColumnName="duedate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="lolModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="userpass" ColumnName="userpass" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="userrole" ColumnName="userrole" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

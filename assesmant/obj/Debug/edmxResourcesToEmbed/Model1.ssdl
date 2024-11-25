@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="lolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tasks">
+    <Key>
+      <PropertyRef Name="taskid" />
+    </Key>
+    <Property Name="taskid" Type="int" Nullable="false" />
+    <Property Name="userid" Type="int" />
+    <Property Name="tasktitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="taskdes" Type="nvarchar" MaxLength="50" />
+    <Property Name="taskstat" Type="nvarchar" MaxLength="50" />
+    <Property Name="duedate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="20" />
+    <Property Name="userpass" Type="nvarchar(max)" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="userrole" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__tasks__userid__276EDEB3">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="tasks" Type="Self.tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="userid" />
+      </Principal>
+      <Dependent Role="tasks">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="lolModelStoreContainer">
+    <EntitySet Name="tasks" EntityType="Self.tasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tasks__userid__276EDEB3" Association="Self.FK__tasks__userid__276EDEB3">
+      <End Role="users" EntitySet="users" />
+      <End Role="tasks" EntitySet="tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,44 @@
+﻿<Window x:Class="assesmant.userpage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:assesmant"
+        mc:Ignorable="d"
+        Title="userpage" Height="450" Width="800">
+    <Grid>
+        <Label Content="Empname" x:Name="Emp_name" Margin="291,10,362,374" FontSize="24" FontFamily="Algerian" FontWeight="Bold"></Label>
+        <Label Content="In progress / Pending" Margin="0,35,514,355" FontSize="24" FontFamily="Times New Roman" FontWeight="Bold"></Label>
+        <DataGrid AutoGenerateColumns="False" x:Name="dginprogress" Margin="0,84,0,246" SelectionChanged="dginprogress_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding taskid}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Title" Binding="{Binding tasktitle}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Descreption" Binding="{Binding taskdes}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Statues" Binding="{Binding taskstat}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="TaskId :" Margin="0,192,710,204" FontSize="22" FontFamily="Times New Roman"></Label>
+        <TextBox x:Name="taskiduserpage" Margin="90,190,530,202"></TextBox>
+        <Label Content="Statues :" Margin="0,192,419,204" HorizontalAlignment="Right" FontSize="22" FontFamily="Times New Roman" Width="83"></Label>
+        <ComboBox x:Name="cmbstatues" Margin="400,201,182,201">
+            <ComboBoxItem Content="In progres"></ComboBoxItem>
+            <ComboBoxItem Content="Pading"></ComboBoxItem>
+            <ComboBoxItem Content="Completed"></ComboBoxItem>
+        </ComboBox>
+        <Button Margin="666,189,10,186" Content="Done" FontFamily="Comic Sans MS" FontSize="36" Click="Button_Click"></Button>
+        <DataGrid AutoGenerateColumns="False" x:Name="dgcompleted" Margin="0,277,0,10" SelectionChanged="dgcompleted_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding taskid}"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding tasktitle}"/>
+                <DataGridTextColumn Header="Descreption" Binding="{Binding taskdes}"/>
+                <DataGridTextColumn Header="Statues" Binding="{Binding taskstat}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Completed" Margin="0,233,514,157" FontSize="24" FontFamily="Times New Roman" FontWeight="Bold"/>
+
+
+
+
+
+    </Grid>
+</Window>
